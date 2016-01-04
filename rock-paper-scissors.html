@@ -1,0 +1,52 @@
+<head>
+  <title>Rock-Scissors-Paper</title>
+</head>
+
+<body></body>
+
+<template name="start">
+
+{{#if alert}}<p style="color:red"><strong>{{alert}}</strong></p>{{/if}}
+
+<p>Currently <strong>{{openrooms.count}} game(s)</strong> available.</p>
+<button class="new">Start New Game Room</button>
+
+<ul>
+{{#each openrooms}}
+  <li>
+    Join Room {{_id}} as
+    <a href="{{_id}}/player1">Player 1</a> or
+    <a href="{{_id}}/player2">Player 2</a>
+  </li>
+{{/each}}
+</ul>
+</template>
+
+<template name="room">
+<p><a href="/">Return to Home Page</a>.</p>
+<p>You are <strong>{{player}}</strong>.</p>
+
+{{#with room roomId}}
+  <hr />
+
+  {{#if result.winner}}
+  <p>Last Match:</p>
+  <p>Player 1: {{result.player1}}.</p>
+  <p>Player 2: {{result.player2}}.</p>
+  <p>Winner: <strong>{{result.winner}}</strong>.</p>
+  {{/if}}
+
+  <hr />
+
+  <p>Current Match:</p>
+  <p>Player 1: {{#if player1.selected_option}}READY{{else}}DECIDING{{/if}}.</p>
+  <p>Player 2: {{#if player2.selected_option}}READY{{else}}DECIDING{{/if}}.</p>
+  <button data-type="rock">ROCK</button>
+  <button data-type="papr">PAPR</button>
+  <button data-type="scsr">SCSR</button>
+{{/with}}
+</template>
+
+<template name="loading">
+  <p>Loading...</p>
+</template>
